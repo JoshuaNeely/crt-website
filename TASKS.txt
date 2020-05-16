@@ -8,5 +8,6 @@ TODO
   * access with "man"?
   * in list-commands?
 * group together aliases in list-commands
+* tab complete commands
 
 DONE

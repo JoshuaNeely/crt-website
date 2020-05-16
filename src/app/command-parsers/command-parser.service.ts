@@ -29,11 +29,12 @@ export class CommandParserService {
     const parseFunction = this.commandRegistry.getParseFunction(command);
     if (parseFunction) {
       parseFunction(parseFunctionData);
+    } else if (command === '') {
+      // no-op
     } else {
       this.commandNotFound(terminal, command);
     }
   }
-
 
   private commandNotFound(terminal: Terminal, command: string) {
     terminal.printAsMachine([

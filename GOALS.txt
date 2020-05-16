@@ -1,3 +1,7 @@
+higher level tasks
+goals/ideas for the whole project
+
+
 TODO
 * serve with https
   * free cert + self host

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CrtTerminalComponent } from './crt-terminal/crt-terminal.component';
+import { CrtTerminalComponent } from './terminals/crt-terminal/crt-terminal.component';
 
 @NgModule({
   declarations: [

@@ -5,7 +5,7 @@ import {
   AfterViewInit,
 } from '@angular/core';
 
-import { CommandParserService } from './command-parser.service';
+import { CommandParserService } from '../../command-parsers/command-parser.service';
 import { Terminal } from '../terminal';
 
 

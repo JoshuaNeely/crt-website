@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Terminal } from '../terminal';
+import { Terminal } from '../terminals/terminal';
 import { VersionService } from '../version.service';
 
 

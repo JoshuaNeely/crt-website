@@ -1,3 +1,6 @@
+$opacity: 0.10;
+$height: 5px;
+
 .scanlines::before {
   content: " ";
   display: block;
@@ -9,9 +12,9 @@
   background: linear-gradient(
     to bottom,
     rgba(18, 16, 16, 0) 50%,
-    rgba(0, 0, 0, 0.25) 50%
+    rgba(0, 0, 0, $opacity) 50%
   );
-  background-size: 100% 8px;
+  background-size: 100% $height;
   z-index: 2;
   pointer-events: none;
 }

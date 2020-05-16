@@ -1,14 +1,29 @@
 <div class="screen scanlines flicker">
   <p class="terminal-line textshadow"
-    *ngFor="let line of terminalLog">
-    {{ line }}
-  </p>
+    *ngFor="let line of terminalLog">{{ line }}</p>
 
-  <input
-    type="text" 
-    class="terminal-line"
-    autofocus
-    [(ngModel)]="userInput"
-    (keyup.enter)="submitLine()"
-  />
+  <!-- required because <input> cannot have pseudo elements -->
+  <p
+    id="terminal-input-mirror"
+    class="terminal-line textshadow cursor-blink"
+  >{{ userInput }}</p>
+
+  <span>
+    <!-- required to prevent focus from going off the page -->
+    <input id="tab-focus-catcher" class="invisible-input">
+
+    <input
+      type="text"
+      id="terminal-input"
+      class="invisible-input"
+      [(ngModel)]="userInput"
+      (keyup.enter)="submitLine()"
+      (blur)="trapInputFocus()"
+      #terminalInput
+    />
+
+    <input id="tab-focus-catcher" class="invisible-input">
+  </span>
+
 </div>
+

@@ -1,0 +1,17 @@
+$blink-hrtz: 1.5s;
+
+.cursor-blink::after {
+  content: "■";
+  position: "absolute";
+  right: 0px;
+  padding-left: 0.0rem;
+  animation: cursor $blink-hrtz infinite;
+  animation-timing-function: step-end;
+}
+
+@keyframes cursor {
+  0% { opacity: 1; }
+  25% { opacity: 0; }
+  75% { opacity: 1; }
+  100% { opacity: 1; }
+}

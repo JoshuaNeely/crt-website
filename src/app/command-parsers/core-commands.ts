@@ -29,9 +29,8 @@ coreCommands.registerCommand(
 coreCommands.registerCommand(
   ['list', 'commands', 'list-commands'],
   (data: FunctionData) => {
-    const registry = coreCommands;
+    const registry = data.aggregatedRegistry;
     const commands = registry.getCommands();
-    // TODO want to add the 'total' registry to FunctionData
     // TODO reduce duplicates by comparing description / function
     //      write both names in-line followed by description?
     data.terminal.printAsMachine( commands );

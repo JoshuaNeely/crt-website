@@ -25,7 +25,8 @@ export class CommandParserService {
     const parseFunctionData = {
       command: command,
       application: application,
-      terminal: terminal
+      terminal: terminal,
+      aggregatedRegistry: this.commandRegistry,
     }
     const parseFunction = this.commandRegistry.getParseFunction(command);
     if (parseFunction) {

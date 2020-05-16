@@ -3,5 +3,6 @@ short term backlog
 
 TODO
 * handle scrolling
+* make the landing/"help" useful, so people can look at it
 
 DONE

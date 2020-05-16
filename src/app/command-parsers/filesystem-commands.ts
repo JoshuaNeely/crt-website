@@ -1,4 +1,4 @@
-import { ParseFunction, FunctionData } from './parse-function';
+import { FunctionData } from './parse-function';
 import { CommandRegistry } from './command-registry';
 
 

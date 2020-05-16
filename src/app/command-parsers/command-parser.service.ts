@@ -5,6 +5,7 @@ import { Application } from '../applications/application';
 import { ParseFunction, FunctionData } from './parse-function';
 import { CommandRegistry } from './command-registry';
 import { fsCommands } from './filesystem-commands';
+import { coreCommands } from './core-commands';
 
 
 @Injectable({
@@ -16,7 +17,7 @@ export class CommandParserService {
 
   constructor() {
     this.commandRegistry = new CommandRegistry();
-    this.commandRegistry.registerCommand(['help', '?'], this.help);
+    this.commandRegistry.merge(coreCommands);
     this.commandRegistry.merge(fsCommands);
   }
 
@@ -29,8 +30,6 @@ export class CommandParserService {
     const parseFunction = this.commandRegistry.getParseFunction(command);
     if (parseFunction) {
       parseFunction(parseFunctionData);
-    } else if (command === '') {
-      // no-op
     } else {
       this.commandNotFound(terminal, command);
     }
@@ -40,24 +39,5 @@ export class CommandParserService {
     terminal.printAsMachine([
       `${command}: command not found`,
     ]);
-  }
-
-  private help(data: FunctionData) {
-    data.terminal.printAsMachine([
-      `Website ${data.application.getVersion()}`,
-      'Help Message Here',
-      'Available commands',
-      'etc',
-      'etc',
-    ]);
-  }
-
-  private ls(terminal: Terminal, command: string) {
-    terminal.printAsMachine([
-      'directory contents here',
-    ]);
-  }
-
-  private cd(terminal: Terminal, command: string) {
   }
 }

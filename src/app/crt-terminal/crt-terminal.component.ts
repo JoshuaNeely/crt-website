@@ -6,6 +6,13 @@ import {
   AfterViewInit,
 } from '@angular/core';
 
+
+interface LogEntry {
+  userEntry: boolean;
+  value: string;
+}
+
+
 @Component({
   selector: 'app-crt-terminal',
   templateUrl: './crt-terminal.component.html',
@@ -13,7 +20,7 @@ import {
 })
 export class CrtTerminalComponent implements OnInit, AfterViewInit {
   userInput: string = '';
-  terminalLog: string[] = [];
+  terminalLog: LogEntry[] = [];
 
   @ViewChild('terminalInput') testTerm: ElementRef;
 
@@ -27,7 +34,8 @@ export class CrtTerminalComponent implements OnInit, AfterViewInit {
   }
 
   submitLine() {
-    this.terminalLog.push(this.userInput);
+    this.print([this.userInput], true);
+    this.parse(this.userInput);
     this.userInput = '';
   }
 
@@ -35,5 +43,33 @@ export class CrtTerminalComponent implements OnInit, AfterViewInit {
     const element = this.testTerm.nativeElement;
     // the timeout is very important... uncertain why
     setTimeout(() => element.focus(), 0);
+  }
+
+  print(lines: string[], userEntry: boolean) {
+    for (const line of lines) {
+      this.terminalLog.push({
+        userEntry: userEntry,
+        value: line,
+      });
+    }
+  }
+
+  parse(input: string) {
+    switch(input) {
+      case 'ls':
+        break;
+
+      case 'cd':
+        break;
+
+      case 'help':
+        this.print([
+          'Help Message Here',
+          'Available commands',
+          'etc',
+          'etc',
+        ], false);
+        break;
+    }
   }
 }

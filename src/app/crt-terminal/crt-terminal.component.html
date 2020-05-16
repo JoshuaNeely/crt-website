@@ -1,11 +1,13 @@
 <div class="screen scanlines flicker">
   <p class="terminal-line textshadow"
-    *ngFor="let line of terminalLog">{{ line }}</p>
+    *ngFor="let line of terminalLog"
+    [ngClass]="{'user-input': line.userEntry}">{{ line.value }}</p>
 
   <!-- required because <input> cannot have pseudo elements -->
   <p
     id="terminal-input-mirror"
-    class="terminal-line textshadow cursor-blink"
+    class="terminal-line user-input
+    textshadow cursor-blink"
   >{{ userInput }}</p>
 
   <span>

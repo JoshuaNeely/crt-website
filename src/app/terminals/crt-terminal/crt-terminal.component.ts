@@ -7,6 +7,7 @@ import {
 
 import { CommandParserService } from '../../command-parsers/command-parser.service';
 import { Terminal } from '../terminal';
+import { Website } from '../../applications/website';
 
 
 interface LogEntry {
@@ -36,9 +37,12 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
   }
 
   submitLine() {
+    // this should be an injected token
+    const application = new Website();
+
     const command = this.userInput;
     this.print([command], true);
-    this.commandParserService.parse(this, command);
+    this.commandParserService.parse(this, application, command);
     this.userInput = '';
   }
 

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import { Terminal } from '../terminals/terminal';
-import { VersionService } from '../version.service';
+import { Application } from '../applications/application';
+import { ParseFunction } from './parse-function';
+import { CommandRegistry } from './command-registry';
 
 
 @Injectable({
@@ -9,29 +11,26 @@ import { VersionService } from '../version.service';
 })
 export class CommandParserService {
 
-  constructor(
-    private versionService: VersionService,
-  ) { }
+  private commandRegistry: CommandRegistry;
 
-  parse(terminal: Terminal, command: string) {
-    switch(command) {
-      case 'ls':
-        this.ls(terminal, command);
-        break;
+  constructor() {
+    this.commandRegistry = new CommandRegistry();
+    this.commandRegistry.registerCommand('help', this.help);
+  }
 
-      case 'cd':
-        this.cd(terminal, command);
-        break;
-
-      case 'help':
-        this.help(terminal, command);
-        break;
-
-      default:
-        this.commandNotFound(terminal, command);
-        break;
+  public parse(
+    terminal: Terminal,
+    application: Application,
+    command: string
+  ): void {
+    const parseFunction = this.commandRegistry.getParseFunction(command);
+    if (parseFunction) {
+      parseFunction(terminal, application, command);
+    } else {
+      this.commandNotFound(terminal, command);
     }
   }
+
 
   private commandNotFound(terminal: Terminal, command: string) {
     terminal.printAsMachine([
@@ -39,9 +38,9 @@ export class CommandParserService {
     ]);
   }
 
-  private help(terminal: Terminal, command: string) {
+  private help(terminal: Terminal, application: Application, command: string) {
     terminal.printAsMachine([
-      `Website ${this.versionService.version}`,
+      `Website ${application.getVersion()}`,
       'Help Message Here',
       'Available commands',
       'etc',
@@ -49,12 +48,12 @@ export class CommandParserService {
     ]);
   }
 
-  ls(terminal: Terminal, command: string) {
+  private ls(terminal: Terminal, command: string) {
     terminal.printAsMachine([
       'directory contents here',
     ]);
   }
 
-  cd(terminal: Terminal, command: string) {
+  private cd(terminal: Terminal, command: string) {
   }
 }

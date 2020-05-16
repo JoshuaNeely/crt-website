@@ -23,7 +23,7 @@ export class CommandRegistry {
   merge(otherRegistry: CommandRegistry) {
     this.registry = {
       ...this.registry,
-      ...otherRegistry
+      ...otherRegistry.registry
     }
   }
 }

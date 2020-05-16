@@ -4,6 +4,7 @@ import { Terminal } from '../terminals/terminal';
 import { Application } from '../applications/application';
 import { ParseFunction } from './parse-function';
 import { CommandRegistry } from './command-registry';
+import { fsCommands } from './filesystem-commands';
 
 
 @Injectable({
@@ -16,6 +17,7 @@ export class CommandParserService {
   constructor() {
     this.commandRegistry = new CommandRegistry();
     this.commandRegistry.registerCommand('help', this.help);
+    this.commandRegistry.merge(fsCommands);
   }
 
   public parse(

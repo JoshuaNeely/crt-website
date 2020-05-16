@@ -5,7 +5,7 @@ import packagejson from '../../package.json';
   providedIn: 'root'
 })
 export class VersionService {
-  get version(): number {
+  get version(): string {
     return packagejson.version;
   }
 }

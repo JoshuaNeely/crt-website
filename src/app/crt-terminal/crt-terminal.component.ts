@@ -1,12 +1,12 @@
 import {
   Component,
-  OnInit,
   ElementRef,
   ViewChild,
   AfterViewInit,
 } from '@angular/core';
 
-import { VersionService } from '../version.service';
+import { CommandParserService } from './command-parser.service';
+import { Terminal } from '../terminal';
 
 
 interface LogEntry {
@@ -20,24 +20,25 @@ interface LogEntry {
   templateUrl: './crt-terminal.component.html',
   styleUrls: ['./crt-terminal.component.scss'],
 })
-export class CrtTerminalComponent implements OnInit, AfterViewInit {
+export class CrtTerminalComponent implements AfterViewInit, Terminal {
+
   userInput: string = '';
   terminalLog: LogEntry[] = [];
 
   @ViewChild('terminalInput') testTerm: ElementRef;
 
-  constructor(private versionService: VersionService) { }
-
-  ngOnInit() {
-  }
+  constructor(
+    private commandParserService: CommandParserService,
+  ) { }
 
   ngAfterViewInit() {
     this.testTerm.nativeElement.focus();
   }
 
   submitLine() {
-    this.print([this.userInput], true);
-    this.parse(this.userInput);
+    const command = this.userInput;
+    this.print([command], true);
+    this.commandParserService.parse(this, command);
     this.userInput = '';
   }
 
@@ -47,53 +48,20 @@ export class CrtTerminalComponent implements OnInit, AfterViewInit {
     setTimeout(() => element.focus(), 0);
   }
 
-  print(lines: string[], userEntry: boolean) {
+  printAsUser(lines: string[]) {
+    this.print(lines, true);
+  }
+
+  printAsMachine(lines: string[]) {
+    this.print(lines, false);
+  }
+
+  private print(lines: string[], userEntry: boolean) {
     for (const line of lines) {
       this.terminalLog.push({
         userEntry: userEntry,
         value: line,
       });
     }
-  }
-
-  parse(input: string) {
-    switch(input) {
-      case 'ls':
-        this.printLs();
-        break;
-
-      case 'cd':
-        this.cd();
-        break;
-
-      case 'help':
-        this.printHelp();
-        break;
-
-      default:
-        this.print([
-          `${input}: command not found`,
-        ], false);
-        break;
-    }
-  }
-
-  printHelp() {
-    this.print([
-      `Website ${this.versionService.version}`,
-      'Help Message Here',
-      'Available commands',
-      'etc',
-      'etc',
-    ], false);
-  }
-
-  printLs() {
-    this.print([
-      'directory contents here',
-    ], false);
-  }
-
-  cd() {
   }
 }

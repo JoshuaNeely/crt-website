@@ -6,6 +6,8 @@ import {
   AfterViewInit,
 } from '@angular/core';
 
+import { VersionService } from '../version.service';
+
 
 interface LogEntry {
   userEntry: boolean;
@@ -24,7 +26,7 @@ export class CrtTerminalComponent implements OnInit, AfterViewInit {
 
   @ViewChild('terminalInput') testTerm: ElementRef;
 
-  constructor() { }
+  constructor(private versionService: VersionService) { }
 
   ngOnInit() {
   }
@@ -78,6 +80,7 @@ export class CrtTerminalComponent implements OnInit, AfterViewInit {
 
   printHelp() {
     this.print([
+      `Website ${this.versionService.version}`,
       'Help Message Here',
       'Available commands',
       'etc',

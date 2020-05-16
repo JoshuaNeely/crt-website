@@ -1,0 +1,14 @@
+<div class="screen scanlines flicker">
+  <p class="terminal-line textshadow"
+    *ngFor="let line of terminalLog">
+    {{ line }}
+  </p>
+
+  <input
+    type="text" 
+    class="terminal-line"
+    autofocus
+    [(ngModel)]="userInput"
+    (keyup.enter)="submitLine()"
+  />
+</div>

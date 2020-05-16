@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css?family=VT323&display=swap");
+@import "scanlines";
+@import "flicker";
+@import "text-shadow";
+
+.screen {
+  background:#111;
+  color:white;
+  width:100%;
+  height:100%;
+
+  .terminal-line {
+    background: inherit;
+    color: inherit;
+
+    width: 100%;
+
+    border: 0;
+    font: 30px "VT323", monospace;
+
+    margin: 0px;
+    padding: 0px;
+
+    &:before {
+      content: ">";
+      position: "absolute";
+      padding-left: 1.5rem;
+      left: 0px;
+    }
+  }
+}

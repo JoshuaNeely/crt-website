@@ -13,6 +13,10 @@ export class CommandRegistry {
     return this.registry[command] || null;
   }
 
+  getCommands(): string[] {
+    return Object.keys(this.registry);
+  }
+
   registerCommand(
     commands: string[],
     parseFunction: ParseFunction

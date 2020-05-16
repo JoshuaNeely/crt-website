@@ -4,5 +4,9 @@ short term backlog
 TODO
 * handle scrolling
 * make the landing/"help" useful, so people can look at it
+* add description to each command, on register
+  * access with "man"?
+  * in list-commands?
+* group together aliases in list-commands
 
 DONE

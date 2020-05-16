@@ -57,19 +57,40 @@ export class CrtTerminalComponent implements OnInit, AfterViewInit {
   parse(input: string) {
     switch(input) {
       case 'ls':
+        this.printLs();
         break;
 
       case 'cd':
+        this.cd();
         break;
 
       case 'help':
+        this.printHelp();
+        break;
+
+      default:
         this.print([
-          'Help Message Here',
-          'Available commands',
-          'etc',
-          'etc',
+          `${input}: command not found`,
         ], false);
         break;
     }
+  }
+
+  printHelp() {
+    this.print([
+      'Help Message Here',
+      'Available commands',
+      'etc',
+      'etc',
+    ], false);
+  }
+
+  printLs() {
+    this.print([
+      'directory contents here',
+    ], false);
+  }
+
+  cd() {
   }
 }

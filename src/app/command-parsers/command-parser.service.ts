@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Terminal } from '../terminals/terminal';
 import { Application } from '../applications/application';
-import { ParseFunction } from './parse-function';
+import { ParseFunction, FunctionData } from './parse-function';
 import { CommandRegistry } from './command-registry';
 import { fsCommands } from './filesystem-commands';
 
@@ -20,14 +20,15 @@ export class CommandParserService {
     this.commandRegistry.merge(fsCommands);
   }
 
-  public parse(
-    terminal: Terminal,
-    application: Application,
-    command: string
-  ): void {
+  public parse(terminal: Terminal, application: Application, command: string): void {
+    const parseFunctionData = {
+      command: command,
+      application: application,
+      terminal: terminal
+    }
     const parseFunction = this.commandRegistry.getParseFunction(command);
     if (parseFunction) {
-      parseFunction(terminal, application, command);
+      parseFunction(parseFunctionData);
     } else {
       this.commandNotFound(terminal, command);
     }
@@ -40,9 +41,9 @@ export class CommandParserService {
     ]);
   }
 
-  private help(terminal: Terminal, application: Application, command: string) {
-    terminal.printAsMachine([
-      `Website ${application.getVersion()}`,
+  private help(data: FunctionData) {
+    data.terminal.printAsMachine([
+      `Website ${data.application.getVersion()}`,
       'Help Message Here',
       'Available commands',
       'etc',

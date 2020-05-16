@@ -14,10 +14,12 @@ export class CommandRegistry {
   }
 
   registerCommand(
-    command: string,
+    commands: string[],
     parseFunction: ParseFunction
   ): void {
-    this.registry[command] = parseFunction;
+    for (const command of commands) {
+      this.registry[command] = parseFunction;
+    }
   }
 
   merge(otherRegistry: CommandRegistry) {

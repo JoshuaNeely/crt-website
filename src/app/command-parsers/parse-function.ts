@@ -4,7 +4,7 @@ import { Application } from '../applications/application';
 export interface FunctionData {
   terminal: Terminal;
   application: Application;
-  command: string;
+  commands: string[];
 }
 
 export type ParseFunction = (FunctionData) => void;

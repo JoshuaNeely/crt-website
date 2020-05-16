@@ -16,7 +16,7 @@ export class CommandParserService {
 
   constructor() {
     this.commandRegistry = new CommandRegistry();
-    this.commandRegistry.registerCommand('help', this.help);
+    this.commandRegistry.registerCommand(['help', '?'], this.help);
     this.commandRegistry.merge(fsCommands);
   }
 

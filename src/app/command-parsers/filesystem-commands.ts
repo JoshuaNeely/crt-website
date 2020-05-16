@@ -5,7 +5,7 @@ import { CommandRegistry } from './command-registry';
 export const fsCommands = new CommandRegistry();
 
 fsCommands.registerCommand(
-  'cd',
+  ['cd'],
   (data: FunctionData) => {
     data.terminal.printAsMachine([
       'pretend cd works :)',
@@ -14,7 +14,7 @@ fsCommands.registerCommand(
 );
 
 fsCommands.registerCommand(
-  'ls',
+  ['ls'],
   (data: FunctionData) => {
     data.terminal.printAsMachine([
       'pretend ls works :)',

@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=VT323&display=swap");
-@import "scanlines";
-@import "flicker";
-@import "text-shadow";
-@import "cursor-blink";
+@import "sass/scanlines";
+@import "sass/flicker";
+@import "sass/text-shadow";
+@import "sass/cursor-blink";
 
 .screen {
   background:#111;

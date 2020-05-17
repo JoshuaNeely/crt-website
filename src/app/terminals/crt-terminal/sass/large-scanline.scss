@@ -20,10 +20,10 @@ $opacity-percent: 0.09;
 
   background: linear-gradient(
     transparent,
-    40%,
+    50%,
+    rgba(55,255,55, 0.01),
+    95%,
     rgba(55,255,55, $opacity-percent),
-    60%,
-    transparent,
   );
 
   animation: large-scanline $scan-time linear infinite;

@@ -6,12 +6,14 @@ import {
 } from '@angular/core';
 
 import { CommandParserService } from '../../command-parsers/command-parser.service';
-import { Terminal } from '../terminal';
+import { Terminal, PrintData } from '../terminal';
 import { Website } from '../../applications/website';
 
 
+// data stored in the log per line
 interface LogEntry {
-  userEntry: boolean;
+  isUserEntry: boolean;
+  isLink: boolean;
   value: string;
 }
 
@@ -54,18 +56,48 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
   }
 
   printAsUser(lines: string[]) {
-    this.print(lines, true, 0);
+    this.print({
+      lines: lines,
+      isUserEntry: true,
+      indentSize: 0,
+      isLink: false,
+    });
   }
 
-  printAsMachine(lines: string[], indent: number=0) {
-    this.print(lines, false, indent);
+  printAsMachine(lines: string[]) {
+    this.print({
+      lines: lines,
+      isUserEntry: false,
+      indentSize: 0,
+      isLink: false,
+    });
   }
 
-  private print(lines: string[], userEntry: boolean, indentSize: number) {
-    const indent = ' '.repeat(indentSize);
-    for (const line of lines) {
+  printLink(lines: string[]) {
+    this.print({
+      lines: lines,
+      isUserEntry: false,
+      indentSize: 0,
+      isLink: true,
+    });
+  }
+
+  printCustom(data: PrintData) {
+    this.print({
+      lines: [],
+      isUserEntry: false,
+      indentSize: 0,
+      isLink: false,
+      ...data
+    });
+  }
+
+  private print(data: PrintData) {
+    const indent = ' '.repeat(data.indentSize);
+    for (const line of data.lines) {
       this.terminalLog.push({
-        userEntry: userEntry,
+        isUserEntry: data.isUserEntry,
+        isLink: data.isLink,
         value: indent + line,
       });
     }

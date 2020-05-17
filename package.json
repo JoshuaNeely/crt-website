@@ -46,7 +46,7 @@
   },
   "husky": {
     "hooks": {
-      "post-commit": "cd deployment && ./build-and-deploy-website"
+      "pre-push": "cd deployment && ./build-and-deploy-website"
     }
   }
 }

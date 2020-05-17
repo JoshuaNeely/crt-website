@@ -12,12 +12,16 @@ coreCommands.registerCommand({
     const message = [
       `JoshBox OS v${data.application.getVersion()}`,
       '',
+      'Features:',
+      '--coming soon!--',
+      '',
       '<ls> and <cd> to explore the site directory',
       '<list> to list available commands',
       '<?> shows this dialog',
     ]
     data.terminal.printAsMachine(message);
   },
+  shortDescription: 'Print the help message',
 });
 
 coreCommands.registerCommand({
@@ -27,6 +31,7 @@ coreCommands.registerCommand({
       `${data.application.getVersion()}`,
     ]);
   },
+  shortDescription: 'Print the OS version',
 });
 
 coreCommands.registerCommand({

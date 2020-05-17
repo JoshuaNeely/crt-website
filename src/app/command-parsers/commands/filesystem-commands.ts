@@ -10,7 +10,8 @@ fsCommands.registerCommand({
     data.terminal.printAsMachine([
       'pretend cd works :)',
     ]);
-  }
+  },
+  shortDescription: 'Navigate directories'
 });
 
 fsCommands.registerCommand({
@@ -19,5 +20,6 @@ fsCommands.registerCommand({
     data.terminal.printAsMachine([
       'pretend ls works :)',
     ]);
-  }
+  },
+  shortDescription: 'List directory contents'
 });

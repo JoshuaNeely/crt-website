@@ -1,0 +1,7 @@
+RUN_OPTIONS="-it --rm -d"
+INSTANCE_NAME="--name website-host-instance"
+EXPOSE_PORTS="-p 80:80"
+IMAGE_NAME="website-host"
+
+docker stop website-host-instance &> /dev/null
+docker run $RUN_OPTIONS $EXPOSE_PORTS $INSTANCE_NAME $IMAGE_NAME

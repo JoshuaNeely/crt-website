@@ -4,8 +4,8 @@ import { Terminal } from '../terminals/terminal';
 import { Application } from '../applications/application';
 import { ParseFunction, FunctionData } from './parse-function';
 import { CommandRegistry } from './command-registry';
-import { fsCommands } from './filesystem-commands';
-import { coreCommands } from './core-commands';
+import { fsCommands } from './commands/filesystem-commands';
+import { coreCommands } from './commands/core-commands';
 
 
 @Injectable({

@@ -1,5 +1,5 @@
-import { FunctionData } from './parse-function';
-import { CommandRegistry } from './command-registry';
+import { FunctionData } from '../parse-function';
+import { CommandRegistry } from '../command-registry';
 
 
 export const fsCommands = new CommandRegistry();

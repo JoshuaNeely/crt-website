@@ -74,3 +74,13 @@ coreCommands.registerCommand({
     // no-op
   },
 });
+
+
+coreCommands.registerCommand({
+  commands: ['links-demo'],
+  parseFunction: (data: FunctionData) => {
+    data.terminal.printAsMachine(['Contact Links:']);
+    data.terminal.printLink(['dummy link 1', 'dummy link 2']);
+  },
+  shortDescription: 'Demo displaying links',
+});

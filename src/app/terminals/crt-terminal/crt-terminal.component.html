@@ -1,7 +1,8 @@
 <div class="screen scanlines flicker">
   <p class="terminal-line textshadow"
     *ngFor="let line of terminalLog"
-    [ngClass]="{'user-input': line.userEntry}">{{ line.value }}</p>
+    [ngClass]="{'user-input': line.isUserEntry, 'terminal-link': line.isLink}"
+    >{{ line.value }}</p>
 
   <!-- required because <input> cannot have pseudo elements -->
   <p

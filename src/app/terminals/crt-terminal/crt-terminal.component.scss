@@ -4,9 +4,15 @@
 @import "sass/text-shadow";
 @import "sass/cursor-blink";
 
+$dim-green: rgba(52, 235, 61, 0.5);
+$bright-green: rgba(52, 235, 61, 1);
+
+$terminal-text-color: $dim-green;
+$terminal-link-color: $bright-green;
+
 .screen {
   background: #111;
-  color: rgba(52, 235, 61, 0.5);
+  color: $terminal-text-color;
   width: 100%;
   height: 100%;
 
@@ -41,6 +47,12 @@
 
     &.user-input::before {
       content: '>';
+    }
+
+    &.terminal-link {
+      color: $terminal-link-color;
+      text-decoration: underline;
+      cursor: pointer;
     }
   }
 }

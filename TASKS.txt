@@ -3,7 +3,8 @@ short term backlog
 
 TODO
 * more graceful startup commands
-* handle scrolling
+* handle vertical LOG scrolling / replacing etc
+* horozontal scrolling -> wrapping 
 * clear command
 * tab complete commands
 * split input into command and arguments

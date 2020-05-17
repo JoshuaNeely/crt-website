@@ -38,8 +38,8 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
   ) { }
 
   ngAfterViewInit() {
-    this.commandParserService.parse(this, this.application, '?');
     this.terminalInput.nativeElement.focus();
+    this.commandParserService.runStartupCommands(this, this.application);
   }
 
   submitLine() {

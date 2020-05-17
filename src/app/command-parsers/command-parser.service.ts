@@ -19,6 +19,14 @@ export class CommandParserService {
     this.commandRegistry = new CommandRegistry();
     this.commandRegistry.merge(coreCommands);
     this.commandRegistry.merge(fsCommands);
+
+  }
+
+  public runStartupCommands(terminal: Terminal, application: Application): void {
+    const startupCommands = ['?', 'newline', 'links'];
+    for (const command of startupCommands) {
+      this.parse(terminal, application, command);
+    }
   }
 
   public parse(terminal: Terminal, application: Application, command: string): void {

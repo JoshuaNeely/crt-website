@@ -21,6 +21,10 @@ export class CommandRegistry {
     return (result && result.parseFunction) || null;
   }
 
+  getRegistrationData(command: string): RegistrationData | null {
+    return this.registry[command] || null;
+  }
+
   getCommands(): string[] {
     return Object.keys(this.registry);
   }

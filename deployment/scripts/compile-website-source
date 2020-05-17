@@ -1,1 +1,2 @@
+echo "\n----COMPILE SOURCE CODE----\n"
 ng build --prod

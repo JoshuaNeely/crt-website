@@ -3,6 +3,7 @@ export abstract class Terminal {
   abstract printAsMachine(lines: string[]): void;
   abstract printLink(line: string, urlLink: string): void;
   abstract printCustom(data: PrintData): void;
+  abstract clear(): void;
 }
 
 // data passed to the print functions

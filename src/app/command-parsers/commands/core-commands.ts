@@ -37,6 +37,24 @@ coreCommands.registerCommand({
 
 
 coreCommands.registerCommand({
+  commands: ['newline', 'nl'],
+  parseFunction: (data: FunctionData) => {
+    data.terminal.printAsMachine(['']);
+  },
+  shortDescription: 'Print a newline',
+});
+
+
+coreCommands.registerCommand({
+  commands: ['clear'],
+  parseFunction: (data: FunctionData) => {
+    data.terminal.clear();
+  },
+  shortDescription: 'Clear the screen',
+});
+
+
+coreCommands.registerCommand({
   commands: ['list', 'commands', 'list-commands'],
   parseFunction: (data: FunctionData) => {
     const registry = data.aggregatedRegistry;

@@ -31,15 +31,15 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
   // this should be an injected token
   application = new Website();
 
-  @ViewChild('terminalInput') testTerm: ElementRef;
+  @ViewChild('terminalInput') terminalInput: ElementRef;
 
   constructor(
     private commandParserService: CommandParserService,
   ) { }
 
   ngAfterViewInit() {
-    this.testTerm.nativeElement.focus();
     this.commandParserService.parse(this, this.application, '?');
+    this.terminalInput.nativeElement.focus();
   }
 
   submitLine() {
@@ -50,7 +50,7 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
   }
 
   trapInputFocus() {
-    const element = this.testTerm.nativeElement;
+    const element = this.terminalInput.nativeElement;
     // the timeout is very important... uncertain why
     setTimeout(() => element.focus(), 0);
   }
@@ -111,5 +111,9 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
         value: indent + line,
       });
     }
+  }
+
+  clear(): void {
+    this.terminalLog = [];
   }
 }

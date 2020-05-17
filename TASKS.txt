@@ -2,9 +2,11 @@ short term backlog
 
 
 TODO
+* host "pages" with contact info and stuff
+  * host within-OS and/or links to the outside word
+    * style links and make them clickable; open NEW tabs
 * handle scrolling
 * clear command
-* access long command descriptions with "man"
 * tab complete commands
 * split input into command and arguments
   * allow commands with options

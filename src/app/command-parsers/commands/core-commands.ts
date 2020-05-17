@@ -24,6 +24,7 @@ coreCommands.registerCommand({
   shortDescription: 'Print the help message',
 });
 
+
 coreCommands.registerCommand({
   commands: ['version', 'v'],
   parseFunction: (data: FunctionData) => {
@@ -33,6 +34,7 @@ coreCommands.registerCommand({
   },
   shortDescription: 'Print the OS version',
 });
+
 
 coreCommands.registerCommand({
   commands: ['list', 'commands', 'list-commands'],
@@ -61,7 +63,7 @@ coreCommands.registerCommand({
 
 function buildIndent(command: string, indentBase: number): string {
   const len = command.length;
-  const indentSize = (Math.ceil(len/indentBase) * indentBase) - len;
+  const indentSize = (Math.ceil(len/indentBase) * indentBase) - len + 1;
   return ' '.repeat(indentSize);
 }
 

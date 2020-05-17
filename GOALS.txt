@@ -6,9 +6,10 @@ TODO
 * serve with https
   * free cert + self host
 * resume
-* networking information; linkedin, npm, github, etc
 * battle snake 
   * add AIs to battle snake?
 * add some chat bots or text based games or something
+* host a production version that update with CI/CD
 
 DONE
+* networking information; linkedin, npm, github, etc

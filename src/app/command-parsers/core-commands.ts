@@ -4,9 +4,9 @@ import { CommandRegistry } from './command-registry';
 
 export const coreCommands = new CommandRegistry();
 
-coreCommands.registerCommand(
-  ['help', '?'],
-  (data: FunctionData) => {
+coreCommands.registerCommand({
+  commands: ['help', '?'],
+  parseFunction: (data: FunctionData) => {
     data.terminal.printAsMachine([
       `Website ${data.application.getVersion()}`,
       'Help Message Here',
@@ -14,32 +14,33 @@ coreCommands.registerCommand(
       'etc',
       'etc',
     ]);
-  }
-);
+  },
+});
 
-coreCommands.registerCommand(
-  ['version', 'v'],
-  (data: FunctionData) => {
+coreCommands.registerCommand({
+  commands: ['version', 'v'],
+  parseFunction: (data: FunctionData) => {
     data.terminal.printAsMachine([
       `${data.application.getVersion()}`,
     ]);
-  }
-);
+  },
+});
 
-coreCommands.registerCommand(
-  ['list', 'commands', 'list-commands'],
-  (data: FunctionData) => {
+coreCommands.registerCommand({
+  commands: ['list', 'commands', 'list-commands'],
+  parseFunction: (data: FunctionData) => {
     const registry = data.aggregatedRegistry;
     const commands = registry.getCommands();
     // TODO reduce duplicates by comparing description / function
     //      write both names in-line followed by description?
     data.terminal.printAsMachine( commands );
-  }
-);
+  },
+  shortDescription: 'List all available commands',
+});
 
-coreCommands.registerCommand(
-  [''],
-  (data: FunctionData) => {
+coreCommands.registerCommand({
+  commands: [''],
+  parseFunction: (data: FunctionData) => {
     // no-op
-  }
-);
+  },
+});

@@ -1,8 +1,15 @@
 import { ParseFunction } from './parse-function';
 
 
+interface RegistrationData {
+  commands: string[];
+  parseFunction: ParseFunction;
+  shortDescription?: string;
+  longDescription?: string;
+}
+
 interface Registry {
-  [command: string]: ParseFunction;
+  [command: string]: RegistrationData;
 }
 
 export class CommandRegistry {
@@ -10,19 +17,17 @@ export class CommandRegistry {
   private registry: Registry = {};
 
   getParseFunction(command: string): ParseFunction | null {
-    return this.registry[command] || null;
+    const result = this.registry[command];
+    return (result && result.parseFunction) || null;
   }
 
   getCommands(): string[] {
     return Object.keys(this.registry);
   }
 
-  registerCommand(
-    commands: string[],
-    parseFunction: ParseFunction
-  ): void {
-    for (const command of commands) {
-      this.registry[command] = parseFunction;
+  registerCommand(data: RegistrationData): void {
+    for (const command of data.commands) {
+      this.registry[command] = data;
     }
   }
 

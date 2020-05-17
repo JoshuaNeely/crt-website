@@ -4,20 +4,20 @@ import { CommandRegistry } from './command-registry';
 
 export const fsCommands = new CommandRegistry();
 
-fsCommands.registerCommand(
-  ['cd'],
-  (data: FunctionData) => {
+fsCommands.registerCommand({
+  commands: ['cd'],
+  parseFunction: (data: FunctionData) => {
     data.terminal.printAsMachine([
       'pretend cd works :)',
     ]);
   }
-);
+});
 
-fsCommands.registerCommand(
-  ['ls'],
-  (data: FunctionData) => {
+fsCommands.registerCommand({
+  commands: ['ls'],
+  parseFunction: (data: FunctionData) => {
     data.terminal.printAsMachine([
       'pretend ls works :)',
     ]);
   }
-);
+});

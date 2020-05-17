@@ -77,10 +77,17 @@ coreCommands.registerCommand({
 
 
 coreCommands.registerCommand({
-  commands: ['links-demo'],
+  commands: ['contact', 'contacts', 'links', 'contact-links'],
   parseFunction: (data: FunctionData) => {
+    const links = [
+      {name: 'Github', url: 'https://github.com/JoshuaNeely'},
+      {name: 'LinkedIn', url: 'https://www.linkedin.com/in/joshua-neely-a33a7712b'},
+      {name: 'Email', url: 'mailto:joshua.a.neely@gmail.com'},
+    ]
     data.terminal.printAsMachine(['Contact Links:']);
-    data.terminal.printLink(['dummy link 1', 'dummy link 2']);
+    for (const link of links) {
+      data.terminal.printLink(link.name, link.url);
+    }
   },
-  shortDescription: 'Demo displaying links',
+  shortDescription: 'List the author\'s contact links',
 });

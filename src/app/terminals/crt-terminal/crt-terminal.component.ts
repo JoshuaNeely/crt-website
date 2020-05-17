@@ -13,7 +13,7 @@ import { Website } from '../../applications/website';
 // data stored in the log per line
 interface LogEntry {
   isUserEntry: boolean;
-  isLink: boolean;
+  urlLink: string;
   value: string;
 }
 
@@ -55,12 +55,22 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
     setTimeout(() => element.focus(), 0);
   }
 
+  clickText(logEntry: LogEntry) {
+    /*
+    const link = logEntry.urlLink;
+    if (link) {
+      //window.location.href = link;
+      window.open(link, '_blank');
+    }
+     */
+  }
+
   printAsUser(lines: string[]) {
     this.print({
       lines: lines,
       isUserEntry: true,
       indentSize: 0,
-      isLink: false,
+      urlLink: '',
     });
   }
 
@@ -69,16 +79,16 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
       lines: lines,
       isUserEntry: false,
       indentSize: 0,
-      isLink: false,
+      urlLink: '',
     });
   }
 
-  printLink(lines: string[]) {
+  printLink(line: string, urlLink: string) {
     this.print({
-      lines: lines,
+      lines: [line],
       isUserEntry: false,
       indentSize: 0,
-      isLink: true,
+      urlLink: urlLink,
     });
   }
 
@@ -87,7 +97,7 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
       lines: [],
       isUserEntry: false,
       indentSize: 0,
-      isLink: false,
+      urlLink: '',
       ...data
     });
   }
@@ -97,7 +107,7 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
     for (const line of data.lines) {
       this.terminalLog.push({
         isUserEntry: data.isUserEntry,
-        isLink: data.isLink,
+        urlLink: data.urlLink,
         value: indent + line,
       });
     }

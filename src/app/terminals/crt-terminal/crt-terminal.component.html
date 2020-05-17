@@ -1,8 +1,19 @@
 <div class="screen scanlines flicker">
-  <p class="terminal-line textshadow"
-    *ngFor="let line of terminalLog"
-    [ngClass]="{'user-input': line.isUserEntry, 'terminal-link': line.isLink}"
-    >{{ line.value }}</p>
+  <span *ngFor="let line of terminalLog">
+    <a class="terminal-line textshadow"
+      *ngIf="line.urlLink"
+      [ngClass]="{'user-input': line.isUserEntry, 'terminal-link': line.urlLink}"
+      (click)="clickText(line)"
+      [href]="line.urlLink"
+      >{{ line.value }}</a>
+
+    <p class="terminal-line textshadow"
+      *ngIf="!line.urlLink"
+      [ngClass]="{'user-input': line.isUserEntry, 'terminal-link': line.urlLink}"
+       (click)="clickText(line)"
+      >{{ line.value }}</p>
+  </span>
+
 
   <!-- required because <input> cannot have pseudo elements -->
   <p

@@ -13,8 +13,11 @@ $terminal-link-color: $bright-green;
 .screen {
   background: #111;
   color: $terminal-text-color;
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
 
   .invisible-input {
     // we can't use "visibility: hidden" or "display: none"

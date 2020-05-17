@@ -22,3 +22,4 @@ DONE
 * more graceful startup commands
 * get newlines to render on mobile
 * get keyboard to work with mobile
+* prevent mobile dragging page; exposing whitespace

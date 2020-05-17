@@ -6,6 +6,11 @@ TODO
 * clear command
 * access long command descriptions with "man"
 * tab complete commands
+* split input into command and arguments
+  * allow commands with options
+  * eg "set-color"
+  * eg "man"
+* get it to work with mobile keyboards
 
 DONE
 * add description to each command, on register

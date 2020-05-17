@@ -2,10 +2,8 @@ short term backlog
 
 
 TODO
-* more graceful startup commands
 * handle vertical LOG scrolling / replacing etc
 * horozontal scrolling -> wrapping 
-* clear command
 * tab complete commands
 * split input into command and arguments
   * allow commands with options
@@ -20,3 +18,5 @@ DONE
 * access short command descriptions in list-commands
 * make the landing/"help" useful, so people can look at it
 * host contact info links in a command
+* clear command
+* more graceful startup commands

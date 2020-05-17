@@ -6,7 +6,7 @@
 
   <span *ngFor="let line of terminalLog"
     [ngSwitch]="line">
-    <a class="terminal-line textshadow"
+    <a class="terminal-line textshadow terminal-link"
       *ngIf="line.urlLink"
       [ngClass]="{'user-input': line.isUserEntry}"
       [href]="line.urlLink"

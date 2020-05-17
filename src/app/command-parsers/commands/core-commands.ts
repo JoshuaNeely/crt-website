@@ -9,13 +9,14 @@ const NO_OP_COMMAND = '';
 coreCommands.registerCommand({
   commands: ['help', '?'],
   parseFunction: (data: FunctionData) => {
-    data.terminal.printAsMachine([
-      `Website ${data.application.getVersion()}`,
-      'Help Message Here',
-      'Available commands',
-      'etc',
-      'etc',
-    ]);
+    const message = [
+      `JoshBox OS v${data.application.getVersion()}`,
+      '',
+      '<ls> and <cd> to explore the site directory',
+      '<list> to list available commands',
+      '<?> shows this dialog',
+    ]
+    data.terminal.printAsMachine(message);
   },
 });
 

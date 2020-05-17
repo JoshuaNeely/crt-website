@@ -26,6 +26,9 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
   userInput: string = '';
   terminalLog: LogEntry[] = [];
 
+  // this should be an injected token
+  application = new Website();
+
   @ViewChild('terminalInput') testTerm: ElementRef;
 
   constructor(
@@ -34,15 +37,13 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
 
   ngAfterViewInit() {
     this.testTerm.nativeElement.focus();
+    this.commandParserService.parse(this, this.application, '?');
   }
 
   submitLine() {
-    // this should be an injected token
-    const application = new Website();
-
     const command = this.userInput;
     this.printAsUser([command]);
-    this.commandParserService.parse(this, application, command);
+    this.commandParserService.parse(this, this.application, command);
     this.userInput = '';
   }
 

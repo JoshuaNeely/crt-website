@@ -1,5 +1,8 @@
-<div class="screen scanlines flicker"
-  #screen>
+<div class="large-scanline-container">
+  <div class="large-scanline"></div>
+</div>
+
+<div class="screen scanlines flicker" #screen>
 
   <span *ngFor="let line of terminalLog"
     [ngSwitch]="line">

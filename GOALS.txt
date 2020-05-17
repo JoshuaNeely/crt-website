@@ -3,13 +3,16 @@ goals/ideas for the whole project
 
 
 TODO
+* improve mobile experience; emphasis iOS
+  * wrapping
+  * pinch/spread gesture to change text size?
 * serve with https
   * free cert + self host
 * resume
 * battle snake 
   * add AIs to battle snake?
 * add some chat bots or text based games or something
-* host a production version that update with CI/CD
 
 DONE
 * networking information; linkedin, npm, github, etc
+* host a production version that update with CI/CD

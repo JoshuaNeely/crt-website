@@ -4,10 +4,10 @@ short term backlog
 TODO
 * handle scrolling
 * make the landing/"help" useful, so people can look at it
-* access command descriptions with "man"?
-  * in list-commands?
+* access long command descriptions with "man"
 * tab complete commands
 
 DONE
 * add description to each command, on register
 * group together aliases in list-commands
+* access short command descriptions in list-commands

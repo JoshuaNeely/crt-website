@@ -4,6 +4,8 @@ import { CommandRegistry } from './command-registry';
 
 export const coreCommands = new CommandRegistry();
 
+const NO_OP_COMMAND = '';
+
 coreCommands.registerCommand({
   commands: ['help', '?'],
   parseFunction: (data: FunctionData) => {
@@ -31,38 +33,19 @@ coreCommands.registerCommand({
   parseFunction: (data: FunctionData) => {
     const registry = data.aggregatedRegistry;
     const commands = registry.getCommands();
-    const uniqueCommands = removeDuplicateCommands(commands, registry);
-    const filterOutNoOp = uniqueCommands.filter(x => x !== '');
+    const registrationData = commands.map(x => registry.getRegistrationData(x));
+    const aliases = registrationData.flatMap(x => x.commands.slice(1));
+    const uniqueCommands = commands.filter(x => !aliases.includes(x));
+    const filterOutNoOp = uniqueCommands.filter(x => x !== NO_OP_COMMAND);
     const output = filterOutNoOp;
     data.terminal.printAsMachine( output );
   },
   shortDescription: 'List all available commands',
 });
 
-function removeDuplicateCommands(
-  commands: string[],
-  registry: CommandRegistry
-): string[] {
-  const redundantCommands: string[] = [];
-  const output = [];
-
-  for (const command of commands) {
-    if (!redundantCommands.includes(command)) {
-      const registrationData = registry.getRegistrationData(command);
-      const aliases = registrationData.commands.filter(
-        x => x !== command
-      );
-      redundantCommands.push(...aliases);
-
-      output.push(command);
-    }
-  }
-
-  return output;
-}
 
 coreCommands.registerCommand({
-  commands: [''],
+  commands: [NO_OP_COMMAND],
   parseFunction: (data: FunctionData) => {
     // no-op
   },

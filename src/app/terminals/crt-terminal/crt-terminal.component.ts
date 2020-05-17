@@ -3,6 +3,7 @@ import {
   ElementRef,
   ViewChild,
   AfterViewInit,
+  HostListener,
 } from '@angular/core';
 
 import { CommandParserService } from '../../command-parsers/command-parser.service';
@@ -28,14 +29,26 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
   userInput: string = '';
   terminalLog: LogEntry[] = [];
 
+  tempMirrorScreenHeight: number;
+  tempMirrorScreenWidth: number;
+
   // this should be an injected token
   application = new Website();
 
-  @ViewChild('terminalInput') terminalInput: ElementRef;
+  @ViewChild('terminalInput')
+  terminalInput: ElementRef;
 
-  constructor(
-    private commandParserService: CommandParserService,
-  ) { }
+  @ViewChild('screen')
+  screen: ElementRef;
+
+  @HostListener('window:resize', ['$event'])
+  private onResize() {
+    this.getScreenSize();
+  }
+
+  constructor(private commandParserService: CommandParserService) {
+    this.onResize();
+  }
 
   ngAfterViewInit() {
     this.terminalInput.nativeElement.focus();
@@ -109,5 +122,12 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
 
   clear(): void {
     this.terminalLog = [];
+  }
+
+  private getScreenSize() {
+    const screenHeight = window.innerHeight;
+    const screenWidth = window.innerWidth;
+    this.tempMirrorScreenHeight = screenHeight;
+    this.tempMirrorScreenWidth = screenWidth;
   }
 }

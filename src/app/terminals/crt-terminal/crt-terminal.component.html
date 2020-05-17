@@ -40,6 +40,7 @@
       class="invisible-input"
       [(ngModel)]="userInput"
       (keyup.enter)="submitLine()"
+      (keyup.shift.enter)="submitLine()"
       (blur)="trapInputFocus()"
       #terminalInput
     />

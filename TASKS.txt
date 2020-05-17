@@ -9,7 +9,6 @@ TODO
   * allow commands with options
   * eg "set-color"
   * eg "man"
-* get keyboard to work with mobile
 * move links command to page navigation?
 * style it up with radial effect; maybe slow scan?
 
@@ -22,3 +21,4 @@ DONE
 * clear command
 * more graceful startup commands
 * get newlines to render on mobile
+* get keyboard to work with mobile

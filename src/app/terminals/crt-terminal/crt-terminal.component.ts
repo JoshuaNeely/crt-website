@@ -56,13 +56,7 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
   }
 
   clickText(logEntry: LogEntry) {
-    /*
-    const link = logEntry.urlLink;
-    if (link) {
-      //window.location.href = link;
-      window.open(link, '_blank');
-    }
-     */
+    this.trapInputFocus();
   }
 
   printAsUser(lines: string[]) {

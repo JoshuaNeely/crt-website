@@ -9,7 +9,7 @@ TODO
   * allow commands with options
   * eg "set-color"
   * eg "man"
-* get it to work with mobile keyboards
+* get keyboard to work with mobile
 * move links command to page navigation?
 
 DONE
@@ -20,3 +20,4 @@ DONE
 * host contact info links in a command
 * clear command
 * more graceful startup commands
+* get newlines to render on mobile

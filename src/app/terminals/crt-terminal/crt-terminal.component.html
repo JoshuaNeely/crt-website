@@ -3,7 +3,6 @@
 </div>
 
 <div class="screen scanlines flicker" #screen>
-
   <span *ngFor="let line of terminalLog"
     [ngSwitch]="line">
     <a class="terminal-line textshadow terminal-link"
@@ -52,13 +51,5 @@
 
     <input id="tab-focus-catcher" class="invisible-input">
   </span>
-
-  <p class="terminal-line">
-    screen height: {{ tempMirrorScreenHeight }}px
-  </p>
-  <p class="terminal-line">
-    screen width: {{ tempMirrorScreenWidth }}px
-  </p>
-
 </div>
 

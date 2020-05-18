@@ -18,6 +18,10 @@ interface LogEntry {
   value: string;
 }
 
+const BASE_FONT_SIZE = 20;
+const LINE_HEIGHT_FONT_RATIO = 0.85;
+const FONT_FAMILY = "VT323, monospace";
+
 
 @Component({
   selector: 'app-crt-terminal',
@@ -28,9 +32,10 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
 
   userInput: string = '';
   terminalLog: LogEntry[] = [];
+  fontSizeRatio: number = 1;
 
-  tempMirrorScreenHeight: number;
-  tempMirrorScreenWidth: number;
+  screenWidthColumns: number;
+  screenHeightRows: number;
 
   // this should be an injected token
   application = new Website();
@@ -43,16 +48,17 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
 
   @HostListener('window:resize', ['$event'])
   private onResize() {
-    this.getScreenSize();
+    this.setupScreenDimensions();
   }
 
-  constructor(private commandParserService: CommandParserService) {
-    this.onResize();
-  }
+  constructor(private commandParserService: CommandParserService) { }
 
   ngAfterViewInit() {
     this.terminalInput.nativeElement.focus();
     this.commandParserService.runStartupCommands(this, this.application);
+    // not sure why this timer is needed...
+    // character widths aren't measured correctly without it
+    setTimeout(() => this.setupScreenDimensions(), 0);
   }
 
   submitLine() {
@@ -60,6 +66,7 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
     this.printAsUser([command]);
     this.commandParserService.parse(this, this.application, command);
     this.userInput = '';
+    this.setupScreenDimensions();
   }
 
   trapInputFocus() {
@@ -124,10 +131,37 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
     this.terminalLog = [];
   }
 
-  private getScreenSize() {
+  private setElementStyle(elementRef: ElementRef, style, value) {
+    elementRef.nativeElement.style[style] = value;
+  }
+
+  private getCharacterHeight(): number {
+    // fonts have a build-in buffer around the characters
+    // lines are slightly smaller than the font to force lines to print closer together
+    return BASE_FONT_SIZE * LINE_HEIGHT_FONT_RATIO;
+  }
+
+  private getCharacterWidth(font: string) {let width;
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    context.font = font;
+    const metrics = context.measureText('@');
+    return metrics.width;
+  }
+
+  private setupScreenDimensions() {
+    const font = `${BASE_FONT_SIZE}pt ${FONT_FAMILY}`;
+
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
-    this.tempMirrorScreenHeight = screenHeight;
-    this.tempMirrorScreenWidth = screenWidth;
+    const characterHeight = this.getCharacterHeight();
+    const characterWidth = this.getCharacterWidth(font);
+
+    this.setElementStyle(this.screen, 'fontSize', `${BASE_FONT_SIZE}px`);
+    this.setElementStyle(this.screen, 'lineHeight', `${characterHeight}px`);
+    this.setElementStyle(this.screen, 'font', font);
+
+    this.screenHeightRows = Math.floor(screenHeight / characterHeight);
+    this.screenWidthColumns = Math.floor(screenWidth / characterWidth);
   }
 }

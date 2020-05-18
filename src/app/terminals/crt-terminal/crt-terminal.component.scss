@@ -33,14 +33,12 @@ $terminal-link-color: $bright-green;
   .terminal-line {
     background: inherit;
     color: inherit;
-    font: 30px "VT323", monospace;
     white-space: pre;
 
     display: block;
     width: 100%;
     margin: 0px;
     padding: 0px;
-    line-height: .85em;
 
     &::before {
       // content: " ";

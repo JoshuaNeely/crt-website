@@ -54,11 +54,13 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
   constructor(private commandParserService: CommandParserService) { }
 
   ngAfterViewInit() {
-    this.terminalInput.nativeElement.focus();
-    this.commandParserService.runStartupCommands(this, this.application);
     // not sure why this timer is needed...
     // character widths aren't measured correctly without it
-    setTimeout(() => this.setupScreenDimensions(), 0);
+    setTimeout(() => {
+      this.setupScreenDimensions();
+      this.terminalInput.nativeElement.focus();
+      this.commandParserService.runStartupCommands(this, this.application);
+    }, 0);
   }
 
   submitLine() {

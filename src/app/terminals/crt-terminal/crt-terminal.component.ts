@@ -13,7 +13,6 @@ import { Website } from '../../applications/website';
 
 // data stored in the log per line
 interface LogEntry {
-  isUserEntry: boolean;
   urlLink: string;
   value: string;
 }
@@ -121,10 +120,10 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
   private print(data: PrintData) {
     const indent = ' '.repeat(data.indentSize);
     for (const line of data.lines) {
+      const carat = data.isUserEntry ? '>' : '';
       this.terminalLog.push({
-        isUserEntry: data.isUserEntry,
         urlLink: data.urlLink,
-        value: indent + line,
+        value: carat + indent + line,
       });
     }
   }

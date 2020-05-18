@@ -7,20 +7,17 @@
     [ngSwitch]="line">
     <a class="terminal-line textshadow terminal-link"
       *ngIf="line.urlLink"
-      [ngClass]="{'user-input': line.isUserEntry}"
       [href]="line.urlLink"
       >{{ line.value }}</a>
 
     <span *ngIf="!line.urlLink">
       <p class="terminal-line textshadow"
         *ngIf="line.value"
-        [ngClass]="{'user-input': line.isUserEntry}"
         (click)="clickText(line)"
         >{{ line.value }}</p>
 
       <span class="terminal-line textshadow"
         *ngIf="!line.value"
-        [ngClass]="{'user-input': line.isUserEntry}"
         (click)="clickText(line)"
         ><br/></span>
     </span>

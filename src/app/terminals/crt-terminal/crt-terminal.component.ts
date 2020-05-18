@@ -117,15 +117,40 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
     });
   }
 
+  private splitStringAtLengthLimit(str: string, limit: number): string[] {
+    const withinLimit = str.substring(0, limit);
+    const outsideLimit = str.substring(limit);
+    if (!outsideLimit) {
+      return [withinLimit];
+    } else {
+      const outside = this.splitStringAtLengthLimit(outsideLimit, limit);
+      return [withinLimit, ...outside];
+    }
+  }
+
   private print(data: PrintData) {
     const indent = ' '.repeat(data.indentSize);
-    for (const line of data.lines) {
-      const carat = data.isUserEntry ? '>' : '';
-      this.terminalLog.push({
+    const carat = data.isUserEntry ? '>' : '';
+
+    const fullLengthLogs = data.lines.map(line => {
+      return {
         urlLink: data.urlLink,
         value: carat + indent + line,
+      }
+    });
+
+    const lineWrappedLogs = fullLengthLogs.flatMap(log => {
+      const limit = this.screenWidthColumns;
+      const splitValue = this.splitStringAtLengthLimit(log.value, limit);
+      return splitValue.map(str => {
+        return {
+          ...log,
+          value: str
+        };
       });
-    }
+    });
+
+    this.terminalLog.push(...lineWrappedLogs);
   }
 
   clear(): void {

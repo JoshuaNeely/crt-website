@@ -3,14 +3,13 @@ short term backlog
 
 TODO
 * handle vertical LOG scrolling / replacing etc
-* horozontal scrolling -> wrapping 
 * tab complete commands
 * split input into command and arguments
   * allow commands with options
   * eg "set-color"
   * eg "man"
 * move links command to page navigation?
-* style it up with radial effect; maybe slow scan?
+* radial effect style
 
 DONE
 * add description to each command, on register
@@ -23,3 +22,5 @@ DONE
 * get newlines to render on mobile
 * get keyboard to work with mobile
 * prevent mobile dragging page; exposing whitespace
+* horozontal scrolling -> wrapping
+* slow scan style

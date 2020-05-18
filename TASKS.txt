@@ -2,6 +2,8 @@ short term backlog
 
 
 TODO
+* re-draw text on screen resize
+  * must shrink AND grow
 * handle vertical LOG scrolling / replacing etc
 * tab complete commands
 * split input into command and arguments

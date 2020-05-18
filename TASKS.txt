@@ -9,7 +9,6 @@ TODO
   * eg "set-color"
   * eg "man"
 * move links command to page navigation?
-* radial effect style
 
 DONE
 * add description to each command, on register
@@ -24,3 +23,4 @@ DONE
 * prevent mobile dragging page; exposing whitespace
 * horozontal scrolling -> wrapping
 * slow scan style
+* radial effect style

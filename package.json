@@ -1,6 +1,6 @@
 {
   "name": "website",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host=0.0.0.0 --port=8080 --disable-host-check",

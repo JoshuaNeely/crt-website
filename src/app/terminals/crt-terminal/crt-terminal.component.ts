@@ -17,7 +17,7 @@ interface LogEntry {
   value: string;
 }
 
-const BASE_FONT_SIZE = 20;
+const BASE_FONT_SIZE = 30;
 const LINE_HEIGHT_FONT_RATIO = 0.85;
 const FONT_FAMILY = "VT323, monospace";
 
@@ -36,6 +36,7 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
 
   screenWidthColumns: number;
   screenHeightRows: number;
+  verticalScrollOffset = 0;
 
   // this should be an injected token
   application = new Website();
@@ -163,19 +164,30 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
     // if dimensions change.
     // Probably useful for scrolling and things too.
     this.fullTerminalLog.push(...fullLengthLogs);
-
-    const lineWrappedLogs = this.buildLineWrappedLogs(fullLengthLogs);
-    this.renderedTerminalLog.push(...lineWrappedLogs);
+    this.reprintTerminalLogs();
   }
 
   // call after screen size is recalculated
   private reprintTerminalLogs() {
     const allLineWrappedLogs = this.buildLineWrappedLogs(this.fullTerminalLog);
-    this.renderedTerminalLog = allLineWrappedLogs;
+    this.renderedTerminalLog = this.getScreenContents(allLineWrappedLogs);
+  }
+
+  private getScreenContents(logs: LogEntry[]): LogEntry[] {
+    const lastIndex = logs.length - 1;
+    const commandEntry = 3;
+    const screenRows = this.screenHeightRows - commandEntry;
+
+    const screenStart = Math.max(
+      (lastIndex - screenRows - this.verticalScrollOffset), 0
+    );
+
+    return logs.slice(screenStart);
   }
 
   clear(): void {
     this.renderedTerminalLog = [];
+    this.fullTerminalLog = [];
   }
 
   private setElementStyle(elementRef: ElementRef, style, value) {
@@ -188,7 +200,8 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
     return BASE_FONT_SIZE * LINE_HEIGHT_FONT_RATIO;
   }
 
-  private getCharacterWidth(font: string) {let width;
+  private getCharacterWidth() {
+    const font = `${BASE_FONT_SIZE}px ${FONT_FAMILY}`;
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
     context.font = font;
@@ -197,16 +210,14 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
   }
 
   private setupScreenDimensions() {
-    const font = `${BASE_FONT_SIZE}pt ${FONT_FAMILY}`;
-
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
     const characterHeight = this.getCharacterHeight();
-    const characterWidth = this.getCharacterWidth(font);
+    const characterWidth = this.getCharacterWidth();
 
+    this.setElementStyle(this.screen, 'fontFamily', `${FONT_FAMILY}`);
     this.setElementStyle(this.screen, 'fontSize', `${BASE_FONT_SIZE}px`);
     this.setElementStyle(this.screen, 'lineHeight', `${characterHeight}px`);
-    this.setElementStyle(this.screen, 'font', font);
 
     this.screenHeightRows = Math.floor(screenHeight / characterHeight);
     this.screenWidthColumns = Math.floor(screenWidth / characterWidth);

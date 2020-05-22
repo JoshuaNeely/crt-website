@@ -1,0 +1,7 @@
+#!/bin/bash
+
+PI_IP=192.168.1.79
+# requires a remote with apache2 set up and /var/www/ owned by the user
+
+./scripts/compile-website-source
+./scripts/deploy-to-remote $PI_IP

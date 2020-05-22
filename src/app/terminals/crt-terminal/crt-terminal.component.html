@@ -3,7 +3,7 @@
 </div>
 
 <div class="screen scanlines flicker" #screen>
-  <span *ngFor="let line of terminalLog"
+  <span *ngFor="let line of renderedTerminalLog"
     [ngSwitch]="line">
     <a class="terminal-line textshadow terminal-link"
       *ngIf="line.urlLink"

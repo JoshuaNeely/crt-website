@@ -30,7 +30,8 @@ const FONT_FAMILY = "VT323, monospace";
 export class CrtTerminalComponent implements AfterViewInit, Terminal {
 
   userInput: string = '';
-  terminalLog: LogEntry[] = [];
+  fullTerminalLog: LogEntry[] = [];      // full account of all logs; no line-splitting
+  renderedTerminalLog: LogEntry[] = [];  // what is actually printed to the screen
   fontSizeRatio: number = 1;
 
   screenWidthColumns: number;
@@ -48,6 +49,7 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
   @HostListener('window:resize', ['$event'])
   private onResize() {
     this.setupScreenDimensions();
+    this.reprintTerminalLogs();
   }
 
   constructor(private commandParserService: CommandParserService) { }
@@ -128,18 +130,20 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
     }
   }
 
-  private print(data: PrintData) {
+  private buildLogEntriesFromPrintData(data: PrintData): LogEntry[] {
     const indent = ' '.repeat(data.indentSize);
     const carat = data.isUserEntry ? '>' : '';
 
-    const fullLengthLogs = data.lines.map(line => {
+    return data.lines.map(line => {
       return {
         urlLink: data.urlLink,
         value: carat + indent + line,
       }
     });
+  }
 
-    const lineWrappedLogs = fullLengthLogs.flatMap(log => {
+  private buildLineWrappedLogs(logs: LogEntry[]): LogEntry[] {
+    return logs.flatMap(log => {
       const limit = this.screenWidthColumns;
       const splitValue = this.splitStringAtLengthLimit(log.value, limit);
       return splitValue.map(str => {
@@ -149,12 +153,29 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
         };
       });
     });
+  }
 
-    this.terminalLog.push(...lineWrappedLogs);
+  private print(data: PrintData) {
+
+    const fullLengthLogs = this.buildLogEntriesFromPrintData(data);
+
+    // We want to store the un-altered logs so we can re-print them later
+    // if dimensions change.
+    // Probably useful for scrolling and things too.
+    this.fullTerminalLog.push(...fullLengthLogs);
+
+    const lineWrappedLogs = this.buildLineWrappedLogs(fullLengthLogs);
+    this.renderedTerminalLog.push(...lineWrappedLogs);
+  }
+
+  // call after screen size is recalculated
+  private reprintTerminalLogs() {
+    const allLineWrappedLogs = this.buildLineWrappedLogs(this.fullTerminalLog);
+    this.renderedTerminalLog = allLineWrappedLogs;
   }
 
   clear(): void {
-    this.terminalLog = [];
+    this.renderedTerminalLog = [];
   }
 
   private setElementStyle(elementRef: ElementRef, style, value) {

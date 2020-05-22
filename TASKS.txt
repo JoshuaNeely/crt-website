@@ -2,8 +2,6 @@ short term backlog
 
 
 TODO
-* re-draw text on screen resize
-  * must shrink AND grow
 * handle vertical LOG scrolling / replacing etc
 * tab complete commands
 * split input into command and arguments
@@ -11,6 +9,7 @@ TODO
   * eg "set-color"
   * eg "man"
 * move links command to page navigation?
+* fix broken links
 
 DONE
 * add description to each command, on register
@@ -26,3 +25,5 @@ DONE
 * horozontal scrolling -> wrapping
 * slow scan style
 * radial effect style
+* re-draw text on screen resize
+  * must shrink AND grow

@@ -6,11 +6,9 @@
 @import "sass/large-scanline";
 @import "sass/vignette";
 
-$dim-green: rgba(52, 235, 61, 0.5);
-$bright-green: rgba(52, 235, 61, 1);
+$green: rgb(52, 235, 61);
 
-$terminal-text-color: $dim-green;
-$terminal-link-color: $bright-green;
+$terminal-text-color: $green;
 
 .screen {
   background: black;
@@ -34,6 +32,7 @@ $terminal-link-color: $bright-green;
   .terminal-line {
     background: inherit;
     color: inherit;
+    filter: opacity(80%);
     white-space: pre;
 
     display: block;
@@ -54,7 +53,7 @@ $terminal-link-color: $bright-green;
     }
 
     &.terminal-link {
-      color: $terminal-link-color;
+      filter: opacity(100%);
       text-decoration: underline;
       cursor: pointer;
     }

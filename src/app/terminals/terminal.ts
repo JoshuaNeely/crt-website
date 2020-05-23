@@ -4,6 +4,7 @@ export abstract class Terminal {
   abstract printLink(line: string, urlLink: string): void;
   abstract printCustom(data: PrintData): void;
   abstract clear(): void;
+  abstract setColor(color: string): void;
 }
 
 // data passed to the print functions

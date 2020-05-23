@@ -109,3 +109,25 @@ coreCommands.registerCommand({
   },
   shortDescription: 'List the author\'s contact links',
 });
+
+
+coreCommands.registerCommand({
+  commands: ['set-color'],
+  parseFunction: (data: FunctionData) => {
+    const color = data.args[0] || '';
+    const isColorValid = validateColor(color);
+    const validExample = '\'set-color #FF00FF\'';
+
+    const message = isColorValid ?
+      [`Terminal color set to ${color}`] :
+      [`${color} is not a valid color`, `ex: ${validExample}`];
+
+    data.terminal.setColor(color);
+    data.terminal.printAsMachine(message);
+  },
+  shortDescription: 'Change terminal text color',
+});
+
+function validateColor(color: string): boolean {
+  return /#([0-9a-fA-F]{6})/.test(color);
+}

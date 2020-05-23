@@ -237,4 +237,8 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
     this.screenHeightRows = Math.floor(screenHeight / characterHeight);
     this.screenWidthColumns = Math.floor(screenWidth / characterWidth);
   }
+
+  setColor(color: string) {
+    this.setElementStyle(this.screen, 'color', color);
+  }
 }

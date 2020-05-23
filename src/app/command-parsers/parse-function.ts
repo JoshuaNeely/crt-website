@@ -6,7 +6,8 @@ import { CommandRegistry } from './command-registry';
 export interface FunctionData {
   terminal: Terminal;
   application: Application;
-  commands: string[];
+  command: string;
+  args: string[];
   aggregatedRegistry: CommandRegistry;
 }
 

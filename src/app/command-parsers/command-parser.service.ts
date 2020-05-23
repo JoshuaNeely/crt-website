@@ -23,14 +23,19 @@ export class CommandParserService {
 
   public runStartupCommands(terminal: Terminal, application: Application): void {
     const startupCommands = ['?', 'newline', 'links', 'newline'];
-    for (const command of startupCommands) {
-      this.parse(terminal, application, command);
+    for (const commandString of startupCommands) {
+      this.parse(terminal, application, commandString);
     }
   }
 
-  public parse(terminal: Terminal, application: Application, command: string): void {
+  public parse(terminal: Terminal, application: Application, commandString: string): void {
+    const tokens = this.tokenize(commandString);
+    const command = tokens[0];
+    const args = tokens.slice(1);
+
     const parseFunctionData = {
       command: command,
+      args: args,
       application: application,
       terminal: terminal,
       aggregatedRegistry: this.commandRegistry,
@@ -47,5 +52,11 @@ export class CommandParserService {
     terminal.printAsMachine([
       `${command}: command not found`,
     ]);
+  }
+
+  private tokenize(commandString: string) {
+    const tokens = commandString.split(/(\s+)/);
+    const removeWhitespace = tokens.filter(x => x.trim() !== '');
+    return removeWhitespace;
   }
 }

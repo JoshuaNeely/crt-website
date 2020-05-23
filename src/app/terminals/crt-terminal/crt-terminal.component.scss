@@ -59,4 +59,18 @@ $terminal-link-color: $bright-green;
       cursor: pointer;
     }
   }
+
+  #input-container {
+    position: relative; // to act as a relative position for a child position: absolute
+
+    #terminal-input-mirror,
+    #terminal-input {
+      position: absolute;
+      top: 0px;
+    }
+
+    #terminal-input {
+      width: 100vw;
+    }
+  }
 }

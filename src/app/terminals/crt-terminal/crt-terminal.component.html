@@ -25,13 +25,13 @@
 
 
   <!-- required because <input> cannot have pseudo elements -->
-  <p
-    id="terminal-input-mirror"
-    class="terminal-line user-input
-    textshadow cursor-blink"
-  >{{ userInput }}</p>
+  <span id="input-container">
+    <p
+      id="terminal-input-mirror"
+      class="terminal-line user-input
+      textshadow cursor-blink"
+    >{{ userInput }}</p>
 
-  <span>
     <!-- required to prevent focus from going off the page -->
     <input id="tab-focus-catcher" class="invisible-input">
 

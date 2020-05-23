@@ -2,14 +2,12 @@ short term backlog
 
 
 TODO
-* handle vertical LOG scrolling / replacing etc
 * tab complete commands
 * split input into command and arguments
   * allow commands with options
   * eg "set-color"
   * eg "man"
 * move links command to page navigation?
-* fix broken links
 
 DONE
 * add description to each command, on register
@@ -27,3 +25,5 @@ DONE
 * radial effect style
 * re-draw text on screen resize
   * must shrink AND grow
+* fix broken links
+* handle vertical LOG scrolling / replacing etc

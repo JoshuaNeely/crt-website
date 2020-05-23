@@ -43,6 +43,7 @@
       (keyup.enter)="submitLine()"
       (keyup.shift.enter)="submitLine()"
       (blur)="trapInputFocus()"
+      (keydown)="handleKeydown($event)"
       #terminalInput
     />
 

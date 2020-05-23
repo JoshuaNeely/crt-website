@@ -65,12 +65,27 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
     }, 0);
   }
 
+  handleKeydown(event) {
+    switch(event.key) {
+      case 'ArrowUp':
+        this.verticalScrollOffset += 1;
+        this.reprintTerminalLogs();
+        break;
+
+      case 'ArrowDown':
+        this.verticalScrollOffset = Math.max(0, this.verticalScrollOffset - 1);
+        this.reprintTerminalLogs();
+        break;
+    }
+  }
+
   submitLine() {
+    this.setupScreenDimensions();
     const command = this.userInput;
+    this.userInput = '';
+    this.verticalScrollOffset = 0;
     this.printAsUser([command]);
     this.commandParserService.parse(this, this.application, command);
-    this.userInput = '';
-    this.setupScreenDimensions();
   }
 
   trapInputFocus() {
@@ -175,7 +190,7 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
 
   private getScreenContents(logs: LogEntry[]): LogEntry[] {
     const lastIndex = logs.length - 1;
-    const commandEntry = 3;
+    const commandEntry = 2;
     const screenRows = this.screenHeightRows - commandEntry;
 
     const screenStart = Math.max(

@@ -2,7 +2,7 @@
 
 REMOTE_IP=$1
 USER=pi # make sure you have an ssh key copied to bypass password automation
-DEPLOYMENT_DIRECTORY=/var/www/; # make sure the user has access!
+DEPLOYMENT_DIRECTORY=/var/www/ # make sure the user has access!
 
 echo $REMOTE_IP
 cp -r ./dist ./html

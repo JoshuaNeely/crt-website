@@ -18,8 +18,9 @@ jobs:
           node-version: '10'
 
       - name: Build Angular Project
-        run: npm ci
-        run: npm run build:prod
+        run: |
+          npm ci
+          npm run build:prod
 
       - name: Deploy with SCP
         uses: horochx/deploy-via-scp@master

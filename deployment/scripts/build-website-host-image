@@ -1,2 +1,0 @@
-echo "\n----BUILD DOCKER IMAGE----\n"
-docker build -t website-host .

@@ -1,3 +1,0 @@
-./scripts/compile-website-source
-./scripts/build-website-host-image
-./scripts/run-website-host-container

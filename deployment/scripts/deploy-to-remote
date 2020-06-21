@@ -2,9 +2,9 @@
 
 REMOTE_IP=$1
 USER=pi # make sure you have an ssh key copied to bypass password automation
-DEPLOYMENT_DIRECTORY=/var/www/ # make sure the user has access!
+DIRECTORY_NAME=static-html
+DEPLOYMENT_DIRECTORY=/home/pi/generic-web-host/ # make sure the user has access!
 
-echo $REMOTE_IP
-cp -r ./dist ./html
-scp -r ./html pi@$REMOTE_IP://$DEPLOYMENT_DIRECTORY
-rm -rf ./html
+cp -r ./dist $DIRECTORY_NAME
+scp -r ./$DIRECTORY_NAME pi@$REMOTE_IP://$DEPLOYMENT_DIRECTORY
+rm -rf ./$DIRECTORY_NAME

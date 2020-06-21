@@ -1,0 +1,32 @@
+name: 'docker-image-publish'
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10'
+
+      - name: Build Angular Project
+        run: npm ci
+        run: npm run build:prod
+
+      - name: Deploy with SCP
+        uses: horochx/deploy-via-scp@master
+        with:
+          local: deployment/dist
+          remote: ${{ secrets.REMOTE }}
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          user: ${{ secrets.USER }}
+          key: ${{ secrets.KEY }}

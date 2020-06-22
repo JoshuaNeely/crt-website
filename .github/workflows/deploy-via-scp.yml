@@ -1,4 +1,4 @@
-name: 'docker-image-publish'
+name: 'deploy via scp'
 
 on:
   push:

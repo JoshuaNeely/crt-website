@@ -25,7 +25,7 @@ jobs:
       - name: Deploy with SCP
         uses: horochx/deploy-via-scp@master
         with:
-          local: deployment/dist
+          local: deployment/dist/.
           remote: ${{ secrets.REMOTE }}
           host: ${{ secrets.HOST }}
           port: ${{ secrets.PORT }}

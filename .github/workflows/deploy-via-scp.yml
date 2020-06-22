@@ -22,12 +22,13 @@ jobs:
           npm ci
           npm run build:prod
 
-      - name: Deploy with SCP
-        uses: horochx/deploy-via-scp@master
+      - name: Deploy with rsync
+        uses: burnett01/rsync-deployments@4.0
         with:
-          local: deployment/dist/.
-          remote: ${{ secrets.REMOTE }}
-          host: ${{ secrets.HOST }}
-          port: ${{ secrets.PORT }}
-          user: ${{ secrets.USER }}
-          key: ${{ secrets.KEY }}
+          switches: -avzr --delete
+          path: deployment/dist/
+          remote_path: ${{ secrets.REMOTE }}
+          remote_host: ${{ secrets.HOST }}
+          remote_port: ${{ secrets.PORT }}
+          remote_user: ${{ secrets.USER }}
+          remote_key: ${{ secrets.KEY }}

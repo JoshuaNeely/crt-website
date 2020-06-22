@@ -4,11 +4,13 @@ import {
   ViewChild,
   AfterViewInit,
   HostListener,
+  Injector,
 } from '@angular/core';
 
 import { CommandParserService } from '../../command-parsers/command-parser.service';
 import { Terminal, PrintData } from '../terminal';
 import { Website } from '../../applications/website';
+import { Application  } from '../../applications/application';
 
 
 // data stored in the log per line
@@ -38,8 +40,7 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
   screenHeightRows: number;
   verticalScrollOffset = 0;
 
-  // this should be an injected token
-  application = new Website();
+  application: Application;
 
   @ViewChild('terminalInput')
   terminalInput: ElementRef;
@@ -53,7 +54,10 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
     this.reprintTerminalLogs();
   }
 
-  constructor(private commandParserService: CommandParserService) { }
+  constructor(
+    private commandParserService: CommandParserService,
+    private injector: Injector,
+  ) { }
 
   ngAfterViewInit() {
     // not sure why this timer is needed...
@@ -63,6 +67,9 @@ export class CrtTerminalComponent implements AfterViewInit, Terminal {
       this.terminalInput.nativeElement.focus();
       this.commandParserService.runStartupCommands(this, this.application);
     }, 0);
+
+    // this should be an injected token?
+    this.application = new Website(this.injector);
   }
 
   handleKeydown(event) {

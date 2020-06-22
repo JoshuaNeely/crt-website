@@ -17,9 +17,11 @@ fsCommands.registerCommand({
 fsCommands.registerCommand({
   commands: ['ls'],
   parseFunction: (data: FunctionData) => {
-    data.terminal.printAsMachine([
-      'pretend ls works :)',
-    ]);
+    data.application.filesystem.ls().subscribe((directory: string[]) => {
+      data.terminal.printAsMachine([
+        directory.join('\n'),
+      ]);
+    });
   },
   shortDescription: 'List directory contents'
 });
